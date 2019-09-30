@@ -1,0 +1,23 @@
+.layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  position: relative;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: auto;
+}
+
+.active {
+    position: absolute;
+}
+
+@media only screen and (max-width: 700px) {
+  .layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
