@@ -2,7 +2,7 @@
 /** @jsx jsx */
 
 import React from "react";
-import { Card, DetailsView } from "modules/components";
+import { Card, DetailsView, SearchBar } from "modules/components";
 import { PokemonCard, Pokemon } from "modules/types";
 
 import { css, jsx } from "@emotion/core";
@@ -14,9 +14,10 @@ interface LandingPageLayoutState {
 
 interface LandingPageLayoutProps {
   pokemons: PokemonCard[];
-  offSet: number;
+  // offSet: number;
   getPokemonDetails: any;
-  pokemonDetails?: Pokemon
+  pokemonDetails?: Pokemon;
+  searchPokemons: (pokemon: string) => void;
 }
 
 export default class LandingPageLayout extends React.Component<LandingPageLayoutProps, LandingPageLayoutState> {
@@ -30,9 +31,14 @@ export default class LandingPageLayout extends React.Component<LandingPageLayout
       () => this.props.getPokemonDetails(this.state.cardSelected))
   }
 
+  handleSearch = (pokemon: string) => {
+    this.props.searchPokemons(pokemon);
+  };
+
   render() {
     const { cardSelected } = this.state;
-    const { pokemons, offSet, pokemonDetails } = this.props;
+    const { pokemons, pokemonDetails } = this.props;
+
     const Loading = () => {
       return (
         <div
@@ -60,7 +66,7 @@ export default class LandingPageLayout extends React.Component<LandingPageLayout
 
     return (
       <div>
-        {/* <SearchBar onRefreshClick={getPokemon} /> */}
+        <SearchBar onSearch={this.handleSearch} />
         {pokemons.length < 1 ? (
           <Loading />
         ) : (
@@ -74,17 +80,25 @@ export default class LandingPageLayout extends React.Component<LandingPageLayout
               }
             `}
           >
-            {pokemons.map(({ name }, index) => {
-              const id = offSet + index + 1;
+            {pokemons.map(({ name, sprites }, index) => {
+              // const id = offSet + index + 1;
               return (
-                <div key={id}>
+                <div key={index}>
                   <Card
                     name={name}
-                    spriteURL={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+                    spriteURL={sprites.front_default}
                     onCardClick={() => this.handleCardClick(name)}
                     back={<div>back</div>}
+                    // render={(display, setDisplay) => (
+                    //   <div>
+                    //     {display && <div>working</div>}
+                    //     <button onClick={() => setDisplay(!display)}>click</button>
+                    //   </div>
+                    // )}
                   />
-                  {(cardSelected === name) && <div css={css`height: 55vh; margin-top: 40px`}><DetailsView pokemonDetails={pokemonDetails}/></div>}
+                  {(cardSelected === name) && <div css={css`height: 55vh; margin-top: 40px;`}>
+                    <DetailsView pokemonDetails={pokemonDetails}/>
+                  </div>}
                 </div>
               );
             })}

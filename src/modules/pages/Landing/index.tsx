@@ -5,7 +5,7 @@ import LandingPageLayout from './Layout';
 import { PokemonCard, Pokemon } from 'modules/types';
 
 const API = 'https://pokeapi.co/api/v2/pokemon/';
-const offSet = Math.floor(Math.random() * (200 - 1)) + 1;
+// const offSet = Math.floor(Math.random() * (200 - 1)) + 1;
 
 
 interface LandingPageProps {}
@@ -23,16 +23,24 @@ class LandingPage extends Component<LandingPageProps, LandingPageState> {
       pokemonDetails: undefined
     };
     this.getPokemonDetails = this.getPokemonDetails.bind(this);
+    this.searchPokemons = this.searchPokemons.bind(this);
   }
 
-  componentDidMount() {
-    this.getPokemons();
-  }
+  // componentDidMount() {
+  //   this.getPokemons();
+  // }
 
-  async getPokemons() {
-    const res = await axios.get(`${API}?limit=50&offset=${offSet}`);
-    const pokemons = res.data.results;
-    this.setState({ pokemons });
+  // async getPokemons() {
+  //   const res = await axios.get(`${API}?limit=50&offset=${offSet}`);
+  //   const pokemons = res.data.results;
+  //   this.setState({ pokemons });
+  // }
+
+  async searchPokemons(pokemon: string) {
+    const res = await axios.get(`${API}${pokemon}`);
+    const searchedPokemon = res.data;
+    this.setState({ pokemons: [searchedPokemon, ...this.state.pokemons] });
+    console.log(searchedPokemon)
   }
 
   async getPokemonDetails(name: string) {
@@ -43,19 +51,20 @@ class LandingPage extends Component<LandingPageProps, LandingPageState> {
         id: data.id,
         name: data.name,
         type: data.types[0].type.name,
-        moves: data.moves
+        moves: data.moves,
+        sprite: data.sprites.front_default
       }
     });
   }
 
   render() {
-    console.log(this.state.pokemonDetails)
     return (
       <MainLayout>
         <LandingPageLayout
           pokemons={this.state.pokemons}
-          offSet={offSet}
+          // offSet={offSet}
           getPokemonDetails={this.getPokemonDetails}
+          searchPokemons={this.searchPokemons}
           pokemonDetails={this.state.pokemonDetails}
         />
       </MainLayout>
