@@ -2,7 +2,7 @@
   "name": "poke-search",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://chuks1993.github.io/poke-search/",
+  "homepage": "https://chuks1993.github.io/poke-search",
   "dependencies": {
     "@emotion/core": "^10.0.17",
     "@types/classnames": "^2.2.9",
@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-   "predeploy": "yarn run build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
