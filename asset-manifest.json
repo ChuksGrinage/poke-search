@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/poke-search/static/css/main.0e6992c4.chunk.css",
+    "main.js": "/poke-search/static/js/main.946d202b.chunk.js",
+    "main.js.map": "/poke-search/static/js/main.946d202b.chunk.js.map",
+    "runtime-main.js": "/poke-search/static/js/runtime-main.f9a0c84a.js",
+    "runtime-main.js.map": "/poke-search/static/js/runtime-main.f9a0c84a.js.map",
+    "static/js/2.10ef60b1.chunk.js": "/poke-search/static/js/2.10ef60b1.chunk.js",
+    "static/js/2.10ef60b1.chunk.js.map": "/poke-search/static/js/2.10ef60b1.chunk.js.map",
+    "index.html": "/poke-search/index.html",
+    "precache-manifest.b857a50d903522cfef4ffd583cfa2277.js": "/poke-search/precache-manifest.b857a50d903522cfef4ffd583cfa2277.js",
+    "service-worker.js": "/poke-search/service-worker.js",
+    "static/css/main.0e6992c4.chunk.css.map": "/poke-search/static/css/main.0e6992c4.chunk.css.map",
+    "static/media/loop2.4141190d.svg": "/poke-search/static/media/loop2.4141190d.svg",
+    "static/media/search.82d30921.svg": "/poke-search/static/media/search.82d30921.svg"
+  }
+}
