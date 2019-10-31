@@ -3,46 +3,13 @@ import React from "react";
 import { css, jsx, keyframes } from "@emotion/core";
 import { Pokemon } from "modules/types";
 
+import styles from './DetailsView.module.css';
+
 interface DetailsViewProps {
   pokemonDetails?: Pokemon;
 }
 
 const DetailsView: React.FC<DetailsViewProps> = ({ pokemonDetails }) => {
-
-// let color;
-//   if (pokemonDetails && pokemonDetails.type) {
-//    color = ((type: string) => {
-//     switch (type) {
-//       case "poison":
-//       case "bug":
-//       case "grass":
-//         return "#379601";
-//       case "ground":
-//         return "#907163";
-//       case "rock":
-//       case "shadow":
-//       case "steel":
-//         return "#AAABB8";
-//       case "ghost":
-//       case "psychic":
-//       case "dark":
-//         return "#44318D";
-//       case "fire":
-//         return "#F13C30";
-//       case "water":
-//       case "ice":
-//         return "#4056A1";
-//       case "electric":
-//       case "dragon":
-//         return "#F7C331";
-//       case "fairy":
-//         return "#D83F87";
-//       default:
-//         return "white";
-//     }})(pokemonDetails.type)
-//   }
-
-
   const dropDown = keyframes`
   from {
       height: 0%;
@@ -73,9 +40,9 @@ const DetailsView: React.FC<DetailsViewProps> = ({ pokemonDetails }) => {
         <div>Loading...</div>
       ) : (
         <div css={css`
-          display: flex;
+          padding: 40px;
         `}>
-          <h4>{pokemonDetails.name}</h4>
+          <h4 css={css`font-size: 40px;`}>{pokemonDetails.name}</h4>
           <div>{pokemonDetails.type}</div>
         </div>
       )}

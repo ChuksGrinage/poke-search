@@ -20,6 +20,10 @@ export default class Header extends React.Component {
           css={css`
             height: 150px;
             width: 500px;
+            @media (max-width: 700px) {
+              width: 300px;
+              height: 100px;
+            }
           `}
         />
       </div>

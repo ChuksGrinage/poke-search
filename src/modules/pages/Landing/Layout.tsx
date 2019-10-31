@@ -101,6 +101,7 @@ export default class LandingPageLayout extends React.Component<LandingPageLayout
               @media (max-width: 700px) {
                 grid-template-columns: repeat(2, 1fr);
                 grid-gap: 10px;
+                width: 100%;
               }
             `}
           >
@@ -132,7 +133,10 @@ export default class LandingPageLayout extends React.Component<LandingPageLayout
                     back={<div>back</div>}
                   />
                   {(cardSelected === name) &&
-                    <div css={css`height: 55vh; margin-top: 40px;`}>
+                    <div css={css`height: 55vh; margin-top: 40px;
+                    @media (max-width: 700px) {
+                      width: 100%;
+                    }`}>
                     <DetailsView pokemonDetails={pokemonDetails}/>
                   </div>}
                 </li>
