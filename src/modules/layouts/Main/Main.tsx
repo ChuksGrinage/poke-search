@@ -14,14 +14,22 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     return (
       <div
         css={css`
-          padding: 20px 200px;
           background-color: #fccd04;
           font-family: sans-serif;
           min-height: 100vh;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 20px;
+
+          @media (max-width: 700px) {
+              padding: 10px;
+            }
         `}
       >
         <Header />
-        {children}
+        <div>{children}</div>
       </div>
     );
 }

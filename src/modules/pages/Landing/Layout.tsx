@@ -2,10 +2,10 @@
 /** @jsx jsx */
 
 import React from "react";
-import { Card, DetailsView, SearchBar } from "modules/components";
+import { Card, DetailsView } from "modules/components";
 import { PokemonCard, Pokemon } from "modules/types";
 
-import { css, jsx } from "@emotion/core";
+import { css, jsx, keyframes } from "@emotion/core";
 
 
 interface LandingPageLayoutState {
@@ -14,10 +14,10 @@ interface LandingPageLayoutState {
 
 interface LandingPageLayoutProps {
   pokemons: PokemonCard[];
-  // offSet: number;
+  offSet: number;
   getPokemonDetails: any;
   pokemonDetails?: Pokemon;
-  searchPokemons: (pokemon: string) => void;
+  getPokemons: () => void;
 }
 
 export default class LandingPageLayout extends React.Component<LandingPageLayoutProps, LandingPageLayoutState> {
@@ -26,18 +26,41 @@ export default class LandingPageLayout extends React.Component<LandingPageLayout
     cardSelected: ''
   }
 
-  handleCardClick = (name: string) => {
-    this.setState({ cardSelected: name},
-      () => this.props.getPokemonDetails(this.state.cardSelected))
-  }
+  // handleCardClick(name: string) {
+  //   this.setState({ cardSelected: name},
+  //     () => this.props.getPokemonDetails(this.state.cardSelected))
+  // }
 
-  handleSearch = (pokemon: string) => {
-    this.props.searchPokemons(pokemon);
-  };
+  handleCardClick(name: string) {
+    const { cardSelected } = this.state;
+    let clickedCard;
+
+    name === cardSelected
+      ? (clickedCard = "")
+      : (clickedCard = name);
+
+    this.setState({
+      cardSelected: clickedCard
+    });
+    this.props.getPokemonDetails(name)
+  }
 
   render() {
     const { cardSelected } = this.state;
-    const { pokemons, pokemonDetails } = this.props;
+    const { pokemons, pokemonDetails, offSet } = this.props;
+
+    const moveIn = keyframes`
+  from {
+        opacity: 0;
+        transform: translateX(1000px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0);
+    }
+`
+
 
     const Loading = () => {
       return (
@@ -66,43 +89,56 @@ export default class LandingPageLayout extends React.Component<LandingPageLayout
 
     return (
       <div>
-        <SearchBar onSearch={this.handleSearch} />
         {pokemons.length < 1 ? (
           <Loading />
         ) : (
-          <div
+          <ul
             css={css`
               display: grid;
               grid-template-columns: repeat(4, 1fr);
               grid-gap: 50px;
+              list-style-type: none;
               @media (max-width: 700px) {
                 grid-template-columns: repeat(2, 1fr);
+                grid-gap: 10px;
               }
             `}
           >
             {pokemons.map(({ name, sprites }, index) => {
-              // const id = offSet + index + 1;
+              const id = offSet + index + 1;
+              const sprite = sprites ?
+                sprites.front_default :
+                `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
               return (
-                <div key={index}>
+                <li key={index} css={css`
+                    animation: ${moveIn} .8s;
+                    :nth-of-type(1n){
+                      animation-delay: .1s
+                    }
+                    :nth-of-type(2n){
+                      animation-delay: .2s
+                    }
+                    :nth-of-type(3n){
+                      animation-delay: .3s
+                    }
+                    :nth-of-type(4n){
+                      animation-delay: .4s
+                    }
+                `}>
                   <Card
                     name={name}
-                    spriteURL={sprites.front_default}
+                    spriteURL={sprite}
                     onCardClick={() => this.handleCardClick(name)}
                     back={<div>back</div>}
-                    // render={(display, setDisplay) => (
-                    //   <div>
-                    //     {display && <div>working</div>}
-                    //     <button onClick={() => setDisplay(!display)}>click</button>
-                    //   </div>
-                    // )}
                   />
-                  {(cardSelected === name) && <div css={css`height: 55vh; margin-top: 40px;`}>
+                  {(cardSelected === name) &&
+                    <div css={css`height: 55vh; margin-top: 40px;`}>
                     <DetailsView pokemonDetails={pokemonDetails}/>
                   </div>}
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         )}
       </div>
     );

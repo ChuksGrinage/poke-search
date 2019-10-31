@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
 import styles from './SearchBar.module.css';
-import search from './search.svg';
-import refresh from "./loop2.svg";
+import { ReactComponent as SearchIcon } from './search.svg';
+import { ReactComponent as Refresh } from "./loop2.svg";
 
 
 interface SearchBarProps {
   onSearch: (text: string) => void;
+  onRefresh: () => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onRefresh }) => {
 
   const [ text, updateText ] = useState('')
 
@@ -19,7 +20,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   }
 
     return (
-      <div>
+      <div className={styles.searchBar}>
         <form className={styles.form}>
           <input
             className={styles.searchInput}
@@ -33,14 +34,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             type="submit"
             onClick={(e) => handleSearchButtonClick(e)}
           >
-            <img src={search} alt="search icon" />
+            <SearchIcon />
           </button>
         </form>
-        { false && (
-          <button>
-            <img src={refresh} alt="refresh icon" />
+          <button className={styles.refreshBtn} onClick={onRefresh}>
+            <Refresh />
           </button>
-        )}
       </div>
     );
 }

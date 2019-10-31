@@ -1,3 +1,7 @@
+.searchBar {
+  display: flex;
+  justify-content: center;
+}
 
 .form {
     display: flex;
@@ -37,6 +41,21 @@
     border: none;
     z-index: 1000;
     transition: all 0.2s;
+}
+
+.refreshBtn {
+  padding: 0;
+  border: none;
+  background: none;
+  transition: all .1s ease-in-out;
+}
+
+.refreshBtn:active {
+  transform: rotate(180deg) scale(.9);
+}
+
+.refreshBtn:focus {
+  outline: none;
 }
 
 @keyframes pulse {

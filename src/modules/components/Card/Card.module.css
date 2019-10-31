@@ -8,12 +8,14 @@
   font-size: 30px;
   perspective: 1500px;
   position: relative;
+  cursor: pointer;
+  /* animation: grow .5s ease-in-out; */
 }
 
 .front {
   border: solid 10px white;
   border-radius: 20px 40px;
-  transition: all 0.8s ease;
+  transition: box-shadow 0.3s ease-out;
   position: absolute;
   top: 0;
   left: 0;
@@ -23,7 +25,11 @@
   overflow: hidden;
   box-shadow: 0 1.5rem 4rem rgba(black, 0.5);
   background-image: linear-gradient(to bottom right, #ffcb05, orange);
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.7);
+}
+
+.front:hover {
+  box-shadow: 0 25px 10px rgba(0, 0, 0, 0.4);
 }
 
 .front > h3 {
@@ -52,7 +58,7 @@
 
 .card.flippable:hover .front {
   transform: rotateY(180deg);
-  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 10px rgba(0, 0, 0, 0.4);
 }
 
 .card.flippable:hover .back {
@@ -63,4 +69,29 @@
 .sprite {
   width: 200px;
   height: 200px;
+}
+
+@keyframes grow {
+  from {
+    /* transform: scale(0); */
+    transform: translateX(3000px);
+  }
+
+  to {
+    /* transform: scale(1); */
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .card {
+    width: 150px;
+    height: 200px;
+    padding: 10px
+  }
+
+  .front > h3 {
+    padding: 0;
+  }
+
 }

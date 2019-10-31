@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from "react";
-import { css, jsx } from "@emotion/core";
+import { css, jsx, keyframes } from "@emotion/core";
 import { Pokemon } from "modules/types";
 
 interface DetailsViewProps {
@@ -41,7 +41,17 @@ const DetailsView: React.FC<DetailsViewProps> = ({ pokemonDetails }) => {
 //         return "white";
 //     }})(pokemonDetails.type)
 //   }
-console.log(pokemonDetails)
+
+
+  const dropDown = keyframes`
+  from {
+      height: 0%;
+    }
+
+    to {
+      height: 100%;
+    }
+`
 
   return (
     <div
@@ -56,6 +66,7 @@ console.log(pokemonDetails)
         left: 0;
         right: 0;
         box-shadow: inset 10px 10px 31px -2px rgba(0, 0, 0, 0.94);
+        animation: ${dropDown} .8s;
       `}
     >
       {!pokemonDetails ? (
